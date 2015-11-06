@@ -1,8 +1,9 @@
-# se494-homework1
-This is the source code for the homework 1 find the test case 
+# se494-homework2
+This is the source code for the homework 2 find the test case 
 You can get the source code from
 Create the automated test code from the given source code.
-Your test code will test at least on these methods.
+Your test code will test all methods.
+You need to use the behaviour checking as well.
 ```java
 CourseServiceImpl
 -getCourseReport(Course course, Integer academicYear);

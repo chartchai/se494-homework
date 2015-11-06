@@ -25,6 +25,11 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     CourseEnrolmentDao courseEnrolmentDao;
 
+    public void setGradeMatcher(GradeMatcher gradeMatcher) {
+        this.gradeMatcher = gradeMatcher;
+    }
+
+    GradeMatcher gradeMatcher ;
     public void setStudentDao(StudentDao studentDao) {
         this.studentDao = studentDao;
     }
@@ -75,7 +80,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public double getStudentGpa(Student student) {
-        GradeMatcher gradeMatcher = new GradeMatcher();
+        if (gradeMatcher == null){
+            throw new RuntimeException("Grade matcher has not been set!!!");
+        }
         double gpa = 0;
         List<CourseEnrolment> courseEnrolments = student.getCourseEnrolments();
         for (CourseEnrolment courseEnrolment : courseEnrolments) {
@@ -91,7 +98,7 @@ public class StudentServiceImpl implements StudentService {
         int count = 0;
         List<CourseEnrolment> courseEnrolments = student.getCourseEnrolments();
         for (CourseEnrolment courseEnrolment : courseEnrolments) {
-            if (courseEnrolment.getOpenedCourse().getAcademicYear() == academicYear) {
+            if (courseEnrolment.getOpenedCourse().getAcademicYear().equals(academicYear)) {
                 gpa += gradeMatcher.getGradeScore(courseEnrolment.getGrade());
                 count++;
             }
