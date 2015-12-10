@@ -1,5 +1,7 @@
 package camt.se494.course.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 /**
@@ -11,7 +13,11 @@ public class CourseEnrolment  implements Comparable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @ManyToOne
+    @JsonBackReference
     Student student;
+    @ManyToOne
+    OpenedCourse openedCourse;
+    String grade;
 
     public OpenedCourse getOpenedCourse() {
         return openedCourse;
@@ -21,10 +27,16 @@ public class CourseEnrolment  implements Comparable{
         this.openedCourse = openedCourse;
     }
 
-    @ManyToOne
-    OpenedCourse openedCourse;
-    String grade;
 
+
+    public CourseEnrolment(Student student, OpenedCourse openedCourse, String grade) {
+        this.student = student;
+        this.openedCourse = openedCourse;
+        this.grade = grade;
+    }
+
+    public CourseEnrolment() {
+    }
 
     public Long getId() {
         return id;

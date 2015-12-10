@@ -15,9 +15,18 @@ public class OpenedCourse {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @ManyToOne
-    @Cascade(CascadeType.ALL)
+    @Cascade({CascadeType.SAVE_UPDATE,CascadeType.MERGE})
     Course course;
     Integer academicYear;
+
+    public OpenedCourse(Course course, Integer academicYear) {
+        this.course = course;
+        this.academicYear = academicYear;
+    }
+
+    public OpenedCourse() {
+
+    }
 
     public Long getId() {
         return id;

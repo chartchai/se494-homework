@@ -33,6 +33,14 @@ public class Course {
         this.courseId = courseId;
     }
 
+    public Course() {
+    }
+
+    public Course(String courseId, String courseName) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+    }
+
     public String getCourseName() {
         return courseName;
     }

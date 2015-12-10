@@ -10,4 +10,5 @@ import java.util.List;
 public interface CourseDao {
     List<Course> getCourse();
     List<Course> getCourse(String partial);
+
 }

@@ -1,6 +1,7 @@
 package camt.se494.course.service.util;
 
 import camt.se494.course.exception.UnAcceptGradeException;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Map;
 /**
  * Created by Dto on 10/2/2015.
  */
+@Component
 public class GradeMatcher {
     Map<String,Double> gradeMap;
     public GradeMatcher(){

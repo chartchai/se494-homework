@@ -27,5 +27,10 @@ public class StudentDaoImpl implements StudentDao {
         return studentRepository.findByStudentIdContainingIgnoreCaseOrNameContainingIgnoreCase(partial,partial);
     }
 
+    @Override
+    public Student updateStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
 
 }

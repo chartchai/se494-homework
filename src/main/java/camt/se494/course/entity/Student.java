@@ -1,7 +1,11 @@
 package camt.se494.course.entity;
 
+import camt.se494.course.service.StudentService;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,6 +22,8 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String studentId;
+    @Transient
+    double gpa;
 
     @Override
     public boolean equals(Object o) {
@@ -44,6 +50,7 @@ public class Student {
 
     @OneToMany(mappedBy = "student")
     @Cascade(CascadeType.ALL)
+    @JsonManagedReference
     List<CourseEnrolment> courseEnrolments = new ArrayList<CourseEnrolment>();
 
     public List<CourseEnrolment> getCourseEnrolments() {
@@ -55,10 +62,21 @@ public class Student {
     }
 
     public double getGpa() {
-        return 0.0;
+        return gpa;
     }
 
-    ;
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
+
+    public Student() {
+    }
+
+    public Student(String studentId, String name) {
+        this.studentId = studentId;
+        this.name = name;
+    }
+
 
     public Long getId() {
         return id;

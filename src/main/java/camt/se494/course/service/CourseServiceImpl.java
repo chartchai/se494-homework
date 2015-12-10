@@ -61,6 +61,15 @@ public class CourseServiceImpl implements CourseService {
 
     }
 
+    @Override
+    public List<Course> getCourseFromIdOrName(String partial) {
+        if (partial == null || partial.equals(""))
+        {
+            return courseDao.getCourse();
+        }else
+        return courseDao.getCourse(partial);
+    }
+
 
     @Override
     @Transactional

@@ -16,4 +16,5 @@ public interface StudentService {
     double getStudentGpa(Student student);
     double getStudentGpa(Student student,Integer academicYear);
     StudentReport getStudentReport(Student student);
+    Student updateStudent(Student student);
 }

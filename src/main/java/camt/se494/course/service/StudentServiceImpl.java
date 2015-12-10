@@ -28,7 +28,7 @@ public class StudentServiceImpl implements StudentService {
     public void setGradeMatcher(GradeMatcher gradeMatcher) {
         this.gradeMatcher = gradeMatcher;
     }
-
+    @Autowired
     GradeMatcher gradeMatcher ;
     public void setStudentDao(StudentDao studentDao) {
         this.studentDao = studentDao;
@@ -42,25 +42,34 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public List<Student> getStudent() {
 
-        return studentDao.getStudent();
+        List<Student> output =  studentDao.getStudent();
+        return addGpa(output);
+
+    }
+
+    private List<Student> addGpa(List<Student> students) {
+        for (Student student : students) {
+            student.setGpa(getStudentGpa(student));
+        }
+        return students;
     }
 
     @Override
     @Transactional
     public List<Student> getStudent(String partial) {
-        return studentDao.getStudent(partial);
+        return addGpa(studentDao.getStudent(partial));
     }
 
     @Override
     @Transactional
     public List<Student> getStudentGradeLowerThan(double gpa) {
-        return getStudentGradeOnBound(gpa, (n) -> (n < gpa));
+        return addGpa(getStudentGradeOnBound(gpa, (n) -> (n < gpa)));
     }
 
     @Override
     @Transactional
     public List<Student> getStudentGradeGreaterThan(double gpa) {
-        return getStudentGradeOnBound(gpa, (n) -> (n > gpa));
+        return addGpa(getStudentGradeOnBound(gpa, (n) -> (n > gpa)));
     }
 
 
@@ -128,6 +137,12 @@ public class StudentServiceImpl implements StudentService {
         }
 
         return studentReport;
+    }
+
+    @Override
+    @Transactional
+    public Student updateStudent(Student student) {
+        return studentDao.updateStudent(student);
     }
 
     public List<Integer> getRegisterYear(List<CourseEnrolment> courseEnrolments){

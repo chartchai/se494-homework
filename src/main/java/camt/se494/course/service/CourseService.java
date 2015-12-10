@@ -13,6 +13,7 @@ public interface CourseService {
     List<Course> getCourse();
     List<Course> getCourse(String partial);
     List<Course> getCourse(Integer academicYear);
+    List<Course> getCourseFromIdOrName(String partial);
     List<Course> getCourse(String partial,Integer academicYear);
     CourseReport getCourseReport(Course course, Integer academicYear);
     double getCourseGpa(List<CourseEnrolment> courseEnrolments);

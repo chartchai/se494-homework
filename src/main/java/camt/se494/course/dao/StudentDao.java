@@ -12,5 +12,6 @@ import java.util.List;
 public interface StudentDao {
     List<Student> getStudent();
     List<Student> getStudent(String partial);
+    Student updateStudent(Student student);
 
 }
